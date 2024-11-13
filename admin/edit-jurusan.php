@@ -2,12 +2,6 @@
 session_start();
 include 'config/db.php';
 
-if (isset($_GET['edit'])) {
-    $id = $_GET['edit'];
-    $sqlJurusan = mysqli_query($connection, "SELECT * FROM jurusan WHERE id = '$id'");
-    $dataEditJurusan = mysqli_fetch_assoc($sqlJurusan);
-}
-
 if (isset($_POST['jurusan'])) {
     $nama_jurusan = $_POST['nama_jurusan'];
     // $aktif = 0;
@@ -18,8 +12,19 @@ if (isset($_POST['jurusan'])) {
     }
 }
 
-if (isset($_POST['edit'])) {
+// select jurusan
+if (isset($_GET['edit'])) {
     $id = $_GET['edit'];
+    $sqlJurusan = mysqli_query($connection, "SELECT * FROM jurusan WHERE id = '$id'");
+    $dataEditJurusan = mysqli_fetch_assoc($sqlJurusan);
+}
+
+$id = isset($_GET['edit']) ? $_GET['edit'] : "";
+
+
+// edit gelombang
+if (isset($_POST['jurusan'])) {
+
     $nama_jurusan = $_POST['nama_jurusan'];
 
     // edit
@@ -76,20 +81,17 @@ if (isset($_POST['edit'])) {
                         <div class="row">
 
                             <div class="card">
-                                <div class="card-header">
-                                    <h1><?= isset($_GET['edit']) ?
-                                            "Edit" : "Tambah" ?> Jurusan</h1>
-                                </div>
+
                                 <div class="card-body">
                                     <div class="row">
                                         <div class="col-md-12">
                                             <form action="" method="post">
                                                 <div class="mb-3">
-                                                    <label for="" class="form-label">Jurusan</label>
-                                                    <input type="text" class="form-control" name="nama_jurusan" value="<?= isset($_GET['edit']) ?  $dataEditJurusan['nama_jurusan'] : '' ?>">
+                                                    <label for="" class="form-label">Edit Jurusan</label>
+                                                    <input type="text" class="form-control" name="nama_jurusan" value="<?= $dataEditJurusan['nama_jurusan'] ?>">
                                                 </div>
                                                 <div class="btn-cta">
-                                                    <button class="btn btn-primary" type="submit" name="<?= isset($_GET['edit']) ? "edit" : 'jurusan' ?>">Kirim</button>
+                                                    <button class="btn btn-primary" type="submit" name="jurusan">Kirim</button>
                                                 </div>
                                             </form>
                                         </div>

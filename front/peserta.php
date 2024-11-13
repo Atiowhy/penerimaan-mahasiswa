@@ -51,6 +51,13 @@ if (isset($_POST['kirim'])) {
 
 <body class="bg-secondary">
     <div class="container">
+        <?php if (isset($_GET['success-insert-data'])) : ?>
+            <div class="alert alert-success" role="alert">
+                Pendaftaran berhasil mohon menunggu konfirmasi dari panitia
+            </div>
+        <?php endif; ?>
+    </div>
+    <div class="container">
         <div class="card mt-5 rounded-3 shadow">
             <div class="card-body d-flex justify-content-center">
                 <div class="row">
@@ -177,10 +184,7 @@ if (isset($_POST['kirim'])) {
                                         <label for="">Mencari Kerja</label>
                                     </div>
                                 </div>
-                                <div class="mb-3">
-                                    <label for="" class="form-label">Status</label>
-                                    <input type="text" class="form-control" name="status">
-                                </div>
+
                                 <div class="btn-cta">
                                     <button class="btn btn-primary" type="submit" name="kirim">Kirim</button>
                                 </div>

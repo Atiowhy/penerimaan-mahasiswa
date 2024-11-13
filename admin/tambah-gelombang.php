@@ -1,4 +1,5 @@
 <?php
+session_start();
 include 'config/db.php';
 
 if (isset($_POST['gelombang'])) {
@@ -9,6 +10,21 @@ if (isset($_POST['gelombang'])) {
     if ($queryInsert) {
         header('location: gelombang.php?insert-gelombang-success');
     }
+}
+
+if (isset($_GET['edit'])) {
+    $id = $_GET['edit'];
+    $sqlGelombang = mysqli_query($connection, "SELECT * FROM gelombang WHERE id = '$id'");
+    $dataGelombang = mysqli_fetch_assoc($sqlGelombang);
+}
+
+if (isset($_POST['edit'])) {
+    $id = $_GET['edit'];
+    $nama_gelombang = $_POST['nama_gelombang'];
+
+    // edit
+    $sqlEdit = mysqli_query($connection, "UPDATE gelombang SET nama_gelombang = '$nama_gelombang' WHERE id = '$id'");
+    header('location: gelombang.php?edit-success');
 }
 ?>
 
@@ -61,7 +77,7 @@ if (isset($_POST['gelombang'])) {
 
                             <div class="card">
                                 <div class="card-header">
-                                    <h1>Tambah Gelombang</h1>
+                                    <h1><?= isset($_GET['edit']) ? "Edit" : "Tambah" ?> Gelombang</h1>
                                 </div>
                                 <div class="card-body">
                                     <div class="row">
@@ -69,10 +85,10 @@ if (isset($_POST['gelombang'])) {
                                             <form action="" method="post">
                                                 <div class="mb-3">
                                                     <label for="" class="form-label">Gelombang</label>
-                                                    <input type="text" class="form-control" name="nama_gelombang">
+                                                    <input type="text" class="form-control" name="nama_gelombang" value="<?= isset($_GET['edit']) ? $dataGelombang['nama_gelombang'] : '' ?>">
                                                 </div>
                                                 <div class="btn-cta">
-                                                    <button class="btn btn-primary" type="submit" name="gelombang">Kirim</button>
+                                                    <button class="btn btn-primary" type="submit" name="<?= isset($_GET['edit']) ? "edit" : "gelombang" ?>">Kirim</button>
                                                 </div>
                                             </form>
                                         </div>

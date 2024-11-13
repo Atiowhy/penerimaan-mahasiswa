@@ -1,6 +1,7 @@
 <?php
+session_start();
 include 'config/db.php';
-$selectJurusan = mysqli_query($connection, "SELECT * FROM jurusan");
+$selectJurusan = mysqli_query($connection, "SELECT * FROM jurusan ORDER BY id DESC");
 // $dataGel = mysqli_fetch_assoc($selectGel);
 
 if (isset($_GET['edit'])) {
@@ -8,6 +9,17 @@ if (isset($_GET['edit'])) {
 
     $updateGel = mysqli_query($connection, "UPDATE gelombang SET aktif = 1 WHERE id = '$id'");
 }
+
+// delete jurusan
+if (isset($_GET['delete'])) {
+    $id = $_GET['delete'];
+
+    // delete
+    $sqlDelete = mysqli_query($connection, "DELETE FROM jurusan WHERE id = $id");
+    header('loaction: jurusan.php?delete-success');
+}
+
+
 ?>
 
 <!DOCTYPE html>
@@ -63,7 +75,7 @@ if (isset($_GET['edit'])) {
                                         <a href="tambah-jurusan.php" class="btn btn-info">Tambah jurusan</a>
                                     </div>
                                     <div class="card-body">
-                                        <?php if (isset($_GET['success-delete'])): ?>
+                                        <?php if (isset($_GET['delete-success'])): ?>
                                             <div id="alert" class="alert alert-success" role="alert">Deleted Success</div>
                                         <?php endif; ?>
                                         <table class="table table-bordered">
@@ -82,7 +94,8 @@ if (isset($_GET['edit'])) {
                                                         <td><?= $no++ ?></td>
                                                         <td><?= $dataJurusan['nama_jurusan'] ?></td>
                                                         <td>
-                                                            <a href="../controller/action_user.php?delete=<?php echo $rowDataUser['id'] ?>" class="btn btn-danger btn-sm"><span class="tf-icon bx bx-trash me-2" onclick="return confirm('Are you sure want to delete this item?')">Delete</span></a>
+                                                            <a href="jurusan.php?delete=<?php echo $dataJurusan['id'] ?>" class="btn btn-danger btn-sm"><span class="tf-icon bx bx-trash me-2" onclick="return confirm('Are you sure want to delete this item?')">Delete</span></a>
+                                                            <a href="tambah-jurusan.php?edit=<?php echo $dataJurusan['id'] ?>" class="btn btn-warning btn-sm"><span class="tf-icon bx bx-trash me-2"">Edit</span></a>
                                                         </td>
                                                     </tr>
                                                 <?php endwhile; ?>
@@ -100,20 +113,21 @@ if (isset($_GET['edit'])) {
                     <?php include 'inc/footer.php' ?>
                     <!-- / Footer -->
 
-                    <div class="content-backdrop fade"></div>
-                </div>
-                <!-- Content wrapper -->
-            </div>
-            <!-- / Layout page -->
-        </div>
+                    <div class=" content-backdrop fade">
+                                    </div>
+                                </div>
+                                <!-- Content wrapper -->
+                            </div>
+                            <!-- / Layout page -->
+                        </div>
 
-        <!-- Overlay -->
-        <div class="layout-overlay layout-menu-toggle"></div>
-    </div>
-    <!-- / Layout wrapper -->
+                        <!-- Overlay -->
+                        <div class="layout-overlay layout-menu-toggle"></div>
+                    </div>
+                    <!-- / Layout wrapper -->
 
 
-    <?php include 'inc/js.php' ?>
+                    <?php include 'inc/js.php' ?>
 </body>
 
 </html>

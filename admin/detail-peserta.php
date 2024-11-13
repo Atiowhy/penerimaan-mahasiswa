@@ -1,4 +1,5 @@
 <?php
+session_start();
 include 'config/db.php';
 
 if (isset($_GET['detail'])) {
@@ -23,7 +24,7 @@ $dataSql = mysqli_fetch_assoc($sqlGelombang);
 $sqlPeserta = mysqli_query($connection, "SELECT peserta_pelatihan.*, jurusan.nama_jurusan, gelombang.nama_gelombang FROM peserta_pelatihan LEFT JOIN jurusan ON peserta_pelatihan.id_jurusan = jurusan.id LEFT JOIN gelombang ON peserta_pelatihan.id_gelombang = gelombang.id");
 $dataAll = mysqli_fetch_assoc($sqlPeserta);
 
-// ambil data nik
+// ambil data nik   
 $nik = $dataAll['nik'];
 $selectByNik = mysqli_query($connection, "SELECT peserta_pelatihan.*, jurusan.nama_jurusan, gelombang.nama_gelombang FROM peserta_pelatihan LEFT JOIN jurusan ON peserta_pelatihan.id_jurusan = jurusan.id LEFT JOIN gelombang ON peserta_pelatihan.id_gelombang = gelombang.id WHERE nik = '$nik'");
 // $dataNik = mysqli_fetch_assoc($selectByNik);

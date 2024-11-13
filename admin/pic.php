@@ -1,9 +1,18 @@
 <?php
-// session_start();
+session_start();
 
 include 'config/db.php';
 // $id = $_SESSION['id'];
 
+// select data pic
+$sqlPIC = mysqli_query($connection, "SELECT users.*, jurusan.nama_jurusan, levels.nama_level FROM users LEFT JOIN jurusan ON users.id_jurusan = jurusan.id LEFT JOIN levels ON users.id_level = levels.id WHERE levels.nama_level = 'pic' ORDER BY id DESC");
+
+// delete pic
+if (isset($_GET['delete'])) {
+    $id = $_GET['delete'];
+    $sql = mysqli_query($connection, "DELETE FROM users WHERE id = '$id'");
+    header('location: pic.php');
+}
 
 // data kejuruan
 $sqlDataJurusan = mysqli_query($connection, "SELECT * FROM jurusan ORDER BY id DESC");
@@ -131,6 +140,47 @@ if (isset($_POST['submit'])) {
                                 </div>
                             </div>
 
+                        </div>
+                        <div class="row mt-5">
+                            <div class="col-md-12">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <div class="table table-responsive">
+                                            <table class="table table-striped">
+                                                <thead>
+                                                    <tr>
+                                                        <th>No</th>
+                                                        <th>Level</th>
+                                                        <th>Jurusan</th>
+                                                        <th>Nama</th>
+                                                        <th>Email</th>
+                                                        <th>Aksi</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <?php
+                                                    $no = 1;
+                                                    while ($dataPic = mysqli_fetch_assoc($sqlPIC)):
+                                                    ?>
+                                                        <tr>
+                                                            <td><?= $no++ ?></td>
+                                                            <td><?= $dataPic['nama_level'] ?></td>
+                                                            <td><?= $dataPic['nama_jurusan'] ?></td>
+                                                            <td><?= $dataPic['nama_lengkap'] ?></td>
+                                                            <td><?= $dataPic['email'] ?></td>
+                                                            <td>
+                                                                <a href="pic.php?delete=<?= $dataPic['id'] ?>" class="btn btn-danger" onclick="return ('apakah anda yakin untuk menghapus data ini?')">
+                                                                    Delete
+                                                                </a>
+                                                            </td>
+                                                        </tr>
+                                                    <?php endwhile; ?>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>

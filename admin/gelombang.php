@@ -1,12 +1,23 @@
 <?php
+session_start();
 include 'config/db.php';
-$selectGel = mysqli_query($connection, "SELECT * FROM gelombang");
+$selectGel = mysqli_query($connection, "SELECT * FROM gelombang ORDER BY id ASC");
 // $dataGel = mysqli_fetch_assoc($selectGel);
 
 if (isset($_GET['edit'])) {
     $id = $_GET['edit'];
 
     $updateGel = mysqli_query($connection, "UPDATE gelombang SET aktif = 1 WHERE id = '$id'");
+    header('location: gelombang.php?set-status-success');
+}
+
+// delete
+if (isset($_GET['delete'])) {
+    $id = $_GET['delete'];
+
+    // delete
+    $sqlDelete = mysqli_query($connection, "DELETE FROM gelombang WHERE id = '$id'");
+    header('location: gelombang.php?delete-success');
 }
 ?>
 
@@ -88,7 +99,8 @@ if (isset($_GET['edit'])) {
                                                         </td>
                                                         <td><?= $dataGel['nama_gelombang'] ?></td>
                                                         <td>
-                                                            <a href="../controller/action_user.php?delete=<?php echo $rowDataUser['id'] ?>" class="btn btn-danger btn-sm"><span class="tf-icon bx bx-trash me-2" onclick="return confirm('Are you sure want to delete this item?')">Delete</span></a>
+                                                            <a href="gelombang.php?delete=<?php echo $dataGel['id'] ?>" class="btn btn-danger btn-sm"><span class="tf-icon bx bx-trash me-2"">Delete</span></a>
+                                                            <a href=" tambah-gelombang.php?edit=<?php echo $dataGel['id'] ?>" class="btn btn-warning btn-sm"><span class="tf-icon bx bx-trash me-2"">Edit</span></a>
                                                         </td>
                                                     </tr>
                                                 <?php endwhile; ?>
@@ -106,20 +118,21 @@ if (isset($_GET['edit'])) {
                     <?php include 'inc/footer.php' ?>
                     <!-- / Footer -->
 
-                    <div class="content-backdrop fade"></div>
-                </div>
-                <!-- Content wrapper -->
-            </div>
-            <!-- / Layout page -->
-        </div>
+                    <div class=" content-backdrop fade">
+                                    </div>
+                                </div>
+                                <!-- Content wrapper -->
+                            </div>
+                            <!-- / Layout page -->
+                        </div>
 
-        <!-- Overlay -->
-        <div class="layout-overlay layout-menu-toggle"></div>
-    </div>
-    <!-- / Layout wrapper -->
+                        <!-- Overlay -->
+                        <div class="layout-overlay layout-menu-toggle"></div>
+                    </div>
+                    <!-- / Layout wrapper -->
 
 
-    <?php include 'inc/js.php' ?>
+                    <?php include 'inc/js.php' ?>
 </body>
 
 </html>

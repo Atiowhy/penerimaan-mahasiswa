@@ -41,15 +41,5 @@ pic
 bug :
 permasalahan di session
 
-1. siswa mendaftar di browser
-2. hasil pendaftaran siswa masuk kedalam akun adminApk
-3. adminApk bertugas untuk menyeleksi lolos atau engganya siswa yg daftar
-4. kalau adminApk meloloskan siswa datanya masuk ke akun PIC
-5. pic seleksi siswa berdasar jurusan
-6. pic bisa merubah status dari lolos menjadi wawancara
-
-7. administrator bisa input data jurusan dan data gelombang
-8. administrator bisa merubah status gelombang dari tidak aktif menjadi aktif
-
-bug yg belum selesai 
+bug yg belum selesai
 permasalaha di session

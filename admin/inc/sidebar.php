@@ -1,5 +1,5 @@
 <?php
-session_start();
+// session_start();
 include 'config/db.php';
 
 $id = $_SESSION['id'];
@@ -129,11 +129,6 @@ $dataUser = mysqli_fetch_assoc($selectUser);
                     <li class="menu-item">
                         <a href="jurusan.php" class="menu-link">
                             <div data-i18n="Alerts">Jurusan</div>
-                        </a>
-                    </li>
-                    <li class="menu-item">
-                        <a href="jurusan.php" class="menu-link">
-                            <div data-i18n="Alerts">Data Peserta</div>
                         </a>
                     </li>
                     <li class="menu-item">
