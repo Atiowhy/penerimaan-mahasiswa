@@ -1,0 +1,55 @@
+user :
+
+1. register user (done)
+2. register user dengan memilih role (done)
+3. login user berdasarkan data dari register (done)
+
+gelombang :
+
+1. insert gelombang (done)
+2. insert nilai awal gelombang tidak aktif (done)
+3. ubah status dari tidak aktif ke aktif (done)
+
+masuk berdarkan role (belum selesai)
+
+insert data level = (done)
+
+dashboard siswa
+
+1. pilih gelombang berdasarkan gelombang yg aktif (done)
+
+insert pendaftaran (done)
+
+perbaiki side bar sesuai yg login (done)
+perbaiki isi data sidebar sesuai yg login
+
+1. administrator (done)
+2. pic (done)
+3. adminApk (done)
+
+adminApk
+
+1. ambil seluruh data peserta beserta gelombang dan jurusannya (done)
+2. ubah status nya jika 0 menunggu verifikasi dan jika 1 = lolos (done)
+3. buat history pendaftaran peserta (done)
+
+pic
+
+1. melihat calon peserta yg lolos berdasarkan jurusan (done)
+2. ubah status dari lolos ke wawancara (belum)
+
+bug :
+permasalahan di session
+
+1. siswa mendaftar di browser
+2. hasil pendaftaran siswa masuk kedalam akun adminApk
+3. adminApk bertugas untuk menyeleksi lolos atau engganya siswa yg daftar
+4. kalau adminApk meloloskan siswa datanya masuk ke akun PIC
+5. pic seleksi siswa berdasar jurusan
+6. pic bisa merubah status dari lolos menjadi wawancara
+
+7. administrator bisa input data jurusan dan data gelombang
+8. administrator bisa merubah status gelombang dari tidak aktif menjadi aktif
+
+bug yg belum selesai 
+permasalaha di session
