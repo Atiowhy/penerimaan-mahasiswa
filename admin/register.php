@@ -1,5 +1,7 @@
 <?php
+
 include 'config/db.php';
+
 
 $level = mysqli_query($connection, "SELECT * FROM levels");
 // $resultlevel = mysqli_fetch_assoc($level);
@@ -11,6 +13,7 @@ if (isset($_POST['register'])) {
     $email = $_POST['email'];
     $id_level = $_POST['id_level'];
     $password = $_POST['password'];
+    
 
     if (!$nama_lengkap || !$email || !$password || !$id_level) {
         echo "Mohon isi semua form";
@@ -25,6 +28,14 @@ if (isset($_POST['register'])) {
     } else {
         header('location: login.php?success-register');
     }
+
+    $nama = 'jhon';
+    $umur = 30;
+    $kota = "Jakarta";
+
+    $data = compact("nama", "umur", "kota");
+    print_r($data);
+    die;
 }
 ?>
 <!DOCTYPE html>
